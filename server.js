@@ -2,7 +2,8 @@ const { Client } = require('discord.js');
 const yt = require('ytdl-core');
 const client = new Client();
 const prefix = "kd!";
-
+var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
+var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "kick ", "");
 let queue = {};
 
 const commands = {
@@ -87,9 +88,8 @@ const commands = {
 	'ban': (msg) => {
 		  var user = msg.mentions.users.first();
   var params = msg.content.replace(cmd + "ban ", "").split(" ");
-  var reason = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
-    var cmd = "k!";
+    var cmd = "kd!";
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
 
 
@@ -112,7 +112,7 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
         return;
       }
 
-      if (reason == null || reason == "" || params[0] == null || params[1] == null) {
+      if (reasonban == null || reasonban == "" || params[0] == null || params[1] == null) {
         msg.channel.send("", {
           embed: {
             title: "Aide - Ban",
@@ -147,13 +147,13 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
         banned = msg.channel.guild.member(user).nickname;
       }
 
-      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a banni du serveur " + msg.guild.name + "\n Raison : **" + reason + "**.");
+      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a banni du serveur " + msg.guild.name + "\n Raison : **" + reasonban + "**.");
 
       setTimeout(function () {
         msg.channel.guild.member(user).ban()
           .then(() => {
-            msg.channel.sendMessage("Utilisateur banni avec succès !\n Modérateur:"+msg.author.username+" \n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : **" + reason +"**\n");
-            console.log("▬▬▬▬ Utilisateur Banni ▬▬▬▬\n Modérateur:"+msg.author.username+"\n Serveur: "+msg.guild.name+"\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : " + reason +"\n")
+            msg.channel.sendMessage("Utilisateur banni avec succès !\n Modérateur:"+msg.author.username+" \n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : **" + reasonban +"**\n");
+            console.log("▬▬▬▬ Utilisateur Banni ▬▬▬▬\n Modérateur:"+msg.author.username+"\n Serveur: "+msg.guild.name+"\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : " + reasonban +"\n")
           })
           .catch(err => {
             msg.reply(`\`${err}\``);
@@ -162,12 +162,11 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
       }, 1000);
 	},
 	'kick': (msg) => {
-var reason = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
 var params = msg.content.replace(cmd + "kick ", "").split(" ");
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
 var user = msg.mentions.users.first();
     console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
-        var cmd = "k!";
+        var cmd = "kd!";
 
       if (!msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
         msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **KICK_MEMBERS**")
@@ -189,7 +188,7 @@ var user = msg.mentions.users.first();
         return;
       }
 
-      if (reason == null || reason == "" || params[0] == null || params[1] == null) {
+      if (reasonkick == null || reasonkick == "" || params[0] == null || params[1] == null) {
         msg.channel.send("", {
           embed: {
             title: "Aide - Kick",
@@ -208,7 +207,7 @@ var user = msg.mentions.users.first();
         return;
       }
 
-      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a kick de " + msg.guild.name + "\nRaison: **" + reason + "**.\n");
+      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a kick de " + msg.guild.name + "\nRaison: **" + reasonkick + "**.\n");
 
       setTimeout(function () {
         msg.channel.guild.member(user).kick()
