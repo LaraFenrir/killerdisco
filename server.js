@@ -160,6 +160,66 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
             return;
           });
       }, 1000);
+	},
+	'kick': (msg) => {
+var reason = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
+var params = msg.content.replace(cmd + "kick ", "").split(" ");
+const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
+var user = msg.mentions.users.first();
+    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+        var cmd = "k!";
+
+      if (!msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
+        msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **KICK_MEMBERS**")
+        return;
+      }
+
+
+      if (user == null) {
+        msg.channel.send("", {
+          embed: {
+            title: "Aide - Kick",
+            description: `
+            Pour kick une personne : k!kick @user (raison)
+            N'oubliez pas de mentionner l'utilisateur.
+            `,
+            timestamp: new Date(),
+            color: 0x4077FF
+          }});
+        return;
+      }
+
+      if (reason == null || reason == "" || params[0] == null || params[1] == null) {
+        msg.channel.send("", {
+          embed: {
+            title: "Aide - Kick",
+            description: `
+            Pour kick une personne : k!kick @user (raison)
+            N'oubliez pas de mentionner l'utilisateur.
+            `,
+            timestamp: new Date(),
+            color: 0x4077FF
+          }});
+        return;
+      }
+
+      if (!msg.channel.guild.member(user).bannable) {
+        msg.reply(":no_entry_sign: Je ne peux pas kick l'utilisateur mentionné **"+msg.author.username+"** :no_entry_sign:");
+        return;
+      }
+
+      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a kick de " + msg.guild.name + "\nRaison: **" + reason + "**.\n");
+
+      setTimeout(function () {
+        msg.channel.guild.member(user).kick()
+          .then(() => {
+            msg.channel.sendMessage("L'utilisateur "+user+" a été kick du serveur !");
+          })
+          .catch(err => {
+            msg.reply(`\`${err}\``);
+            return;
+          });
+      }, 1000);
 	}
 };
 
