@@ -29,12 +29,12 @@ const commands = {
 				} else if (m.content.startsWith(prefix + 'resume')){
 					msg.channel.sendMessage('Musique reprise.').then(() => {dispatcher.resume();});
 				} else if (m.content.startsWith(prefix + 'skip')){
-					msg.channel.sendMessage('Muisque passée.').then(() => {dispatcher.end();});
-				} else if (m.content.startsWith('volume+')){
+					msg.channel.sendMessage('Musique passée.').then(() => {dispatcher.end();});
+				} else if (m.content.startsWith(prefix +'volume+')){
 					if (Math.round(dispatcher.volume*50) >= 100) return msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.min((dispatcher.volume*50 + (5*(m.content.split('+').length-1)))/50,2));
 					msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
-				} else if (m.content.startsWith('volume-')){
+				} else if (m.content.startsWith(prefix +'volume-')){
 					if (Math.round(dispatcher.volume*50) <= 0) return msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.max((dispatcher.volume*50 - (5*(m.content.split('-').length-1)))/50,0));
 					msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
