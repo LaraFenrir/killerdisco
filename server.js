@@ -20,7 +20,7 @@ const commands = {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
-			msg.channel.sendMessage(`Joue : **${song.title}**\n Requête de :**${song.requester}**`);
+			msg.channel.sendMessage(`Joue : **${song.title}**\nRequête de :**${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }));
 			let collector = msg.channel.createCollector(m => m);
 			collector.on('message', m => {
@@ -29,7 +29,7 @@ const commands = {
 				} else if (m.content.startsWith(prefix + 'resume')){
 					msg.channel.sendMessage('Musique reprise.').then(() => {dispatcher.resume();});
 				} else if (m.content.startsWith(prefix + 'skip')){
-					msg.channel.sendMessage('Musique passée.').then(() => {dispatcher.end();});
+					msg.channel.sendMessage('Muisque passée.').then(() => {dispatcher.end();});
 				} else if (m.content.startsWith(prefix +'volume+')){
 					if (Math.round(dispatcher.volume*50) >= 100) return msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.min((dispatcher.volume*50 + (5*(m.content.split('+').length-1)))/50,2));
@@ -83,11 +83,88 @@ const commands = {
 	},
 	'reboot': (msg) => {
 		if (msg.author.id == "242682458083033089") process.exit(); //Requires a node module like Forever to work.
+	},
+	'ban': (msg) => {
+		  var user = msg.mentions.users.first();
+  var params = msg.content.replace(cmd + "ban ", "").split(" ");
+  var reason = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
+   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+    var cmd = "k!";
+const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
+
+
+      if (!msg.guild.member(msg.author).hasPermission("BAN_MEMBERS")) {
+        msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **BAN_MEMBERS**")
+        return;
+      }
+
+      if (user == null) {
+        msg.channel.send("", {
+          embed: {
+            title: "Aide - Ban",
+            description: `
+            Pour bannir une personne : k!ban @user (raison)
+            N'oubliez pas de mentionner l'utilisateur.
+            `,
+            timestamp: new Date(),
+            color: 0x4077FF
+          }});
+        return;
+      }
+
+      if (reason == null || reason == "" || params[0] == null || params[1] == null) {
+        msg.channel.send("", {
+          embed: {
+            title: "Aide - Ban",
+            description: `
+            Pour bannir une personne : k!ban @user (raison)
+            N'oubliez pas de mentionner l'utilisateur.
+            `,
+            timestamp: new Date(),
+            color: 0x4077FF
+          }
+        });
+        return;
+      }
+
+      if (!msg.channel.guild.member(user).bannable) {
+        msg.channel.sendMessage(":no_entry_sign: Je ne peux pas bannir l'utilisateur mentionné **"+msg.author.username+"** :no_entry_sign:");
+        return;
+      }
+
+      var banner = "";
+      var banned = "";
+
+      if (msg.channel.guild.member(msg.author).nickname == null) {
+        banner = msg.author.username;
+      } else {
+        banner = msg.channel.guild.member(msg.author).nickname;
+      }
+
+      if (msg.channel.guild.member(user).nickname == null) {
+        banned = user.username;
+      } else {
+        banned = msg.channel.guild.member(user).nickname;
+      }
+
+      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a banni du serveur " + msg.guild.name + "\n Raison : **" + reason + "**.");
+
+      setTimeout(function () {
+        msg.channel.guild.member(user).ban()
+          .then(() => {
+            msg.channel.sendMessage("Utilisateur banni avec succès !\n Modérateur:"+msg.author.username+" \n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : **" + reason +"**\n");
+            console.log("▬▬▬▬ Utilisateur Banni ▬▬▬▬\n Modérateur:"+msg.author.username+"\n Serveur: "+msg.guild.name+"\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : " + reason +"\n")
+          })
+          .catch(err => {
+            msg.reply(`\`${err}\``);
+            return;
+          });
+      }, 1000);
 	}
 };
 
 client.on('ready', () => {
-	console.log('Je suis là ! :)');
+	console.log('▬▬▬▬▬▬▬▬▬▬▬▬\nConnecté à Discord\n▬▬▬▬▬▬▬▬▬▬▬▬\n');
 });
 
 client.on('message', msg => {
