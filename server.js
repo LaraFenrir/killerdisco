@@ -223,7 +223,7 @@ var user = msg.mentions.users.first();
           });
       }, 1000);
 	},
-	'ping' (msg) => {
+	'ping': (msg) => {
 	var initTime = new Date(msg.timestamp)
     msg.reply('Pong!').then((m) => {
       m.edit('<@' + msg.author.id + '>, Pong! Time taken: ' + Math.floor(new Date(m.timestamp) - initTime) + ' ms.')
