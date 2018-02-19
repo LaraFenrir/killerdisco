@@ -225,8 +225,7 @@ var user = msg.mentions.users.first();
 	},
 	'ping': (msg) => {
 	var initTime = new Date(msg.timestamp)
-    msg.reply('Pong!').then((m) => {
-      m.edit('Pong ! :ping_pong: | *' + (new Date(message.timestamp) - new Date(msg.timestamp)) + '*ms')
+	msg.channel.send('Pong ! :ping_pong: | *'+ (new Date(message.timestamp) - new Date(msg.timestamp)) +'*ms')
     })
 	}
 };
