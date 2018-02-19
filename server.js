@@ -222,11 +222,6 @@ var user = msg.mentions.users.first();
             return;
           });
       }, 1000);
-	},
-	'ping': (msg) => {
-	var initTime = new Date(msg.timestamp)
-	msg.channel.send("Pong ! :ping_pong: | *"+ (new Date(message.timestamp) - new Date(msg.timestamp)) +"*ms")
-    }
 	}
 };
 
