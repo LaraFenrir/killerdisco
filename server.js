@@ -2,9 +2,12 @@ const { Client } = require('discord.js');
 const yt = require('ytdl-core');
 const client = new Client();
 const prefix = "kd!";
+let queue = {};
+
+module.exports = function (msg) {
 var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
 var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "kick ", "");
-let queue = {};
+};
 
 const commands = {
 	'play': (msg) => {
