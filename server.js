@@ -226,7 +226,7 @@ var user = msg.mentions.users.first();
 	'ping': (msg) => {
 	var initTime = new Date(msg.timestamp)
     msg.reply('Pong!').then((m) => {
-      m.edit('<@' + msg.author.id + '>, Pong! Time taken: ' + Math.floor(new Date(m.timestamp) - initTime) + ' ms.')
+      m.edit('Pong ! :ping_pong: | *' + (new Date(message.timestamp) - new Date(msg.timestamp)) + '*ms)
     })
 	}
 };
