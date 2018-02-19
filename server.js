@@ -219,7 +219,11 @@ var user = msg.mentions.users.first();
             return;
           });
       }, 1000);
-	}
+	},
+	'ping': (msg) => {
+		    var initTime = new Date(msg.timestamp)
+    msg.channel.send('Calcul en cours ...').then((m) => {
+      m.edit('<@' + msg.author.id + '>, Pong! Time taken: ' + Math.floor(new Date(m.timestamp) - initTime) + ' ms.')
 };
 
 client.on('ready', () => {
