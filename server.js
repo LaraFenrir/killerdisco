@@ -78,7 +78,7 @@ const commands = {
 	'queue': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`La playlist est vide, ajouter une musique avec ${prefix}add`);
 		let tosend = [];
-		queue[msg.guild.id].songs.forEach((song, i) => { tosend.push(`${i+1}. ${song.title} - Requested by: ${song.requester}`);});
+		queue[msg.guild.id].songs.forEach((song, i) => { tosend.push(`${i+1}. ${song.title} - Requête par : ${song.requester}`);});
 		msg.channel.sendMessage(`**${tosend.length}** musiques dans la playlist ${(tosend.length > 15 ? '*[Seulement 15 musiques apparaissent]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
 	},
 	'help': (msg) => {
