@@ -229,7 +229,16 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
       image:{url:ava}
   }
   msg.channel.send("", {embed});
-	}
+	},
+	'math': (msg) => {
+		let repo;
+  try {
+    repo = math.eval(message.suffix);
+  } catch (err) {
+    repo = err
+  }
+  message.channel.send("**Calcul**\n```js\n" + message.suffix + "```\n**Réponse**\n```js\n" + repo + "```")
+}
 };
 
 client.on('ready', () => {
