@@ -4,11 +4,6 @@ const client = new Client();
 const prefix = "kd!";
 let queue = {};
 
-module.exports = function (msg) {
-var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
-var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "kick ", "");
-};
-
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
@@ -93,6 +88,7 @@ const commands = {
   var params = msg.content.replace(cmd + "ban ", "").split(" ");
    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
     var cmd = "kd!";
+var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
 
 
@@ -167,10 +163,11 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
 	'kick': (msg) => {
 var params = msg.content.replace(cmd + "kick ", "").split(" ");
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
+
 var user = msg.mentions.users.first();
     console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
         var cmd = "kd!";
-
+var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
       if (!msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
         msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **KICK_MEMBERS**")
         return;
