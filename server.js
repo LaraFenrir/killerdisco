@@ -28,7 +28,7 @@ const commands = {
 				} else if (m.content.startsWith(prefix + 'resume')){
 					msg.channel.sendMessage('Musique reprise.').then(() => {dispatcher.resume();});
 				} else if (m.content.startsWith(prefix + 'skip')){
-					msg.channel.sendMessage('Muisque passée.').then(() => {dispatcher.end();});
+					msg.channel.sendMessage('Musique passée.').then(() => {dispatcher.end();});
 				} else if (m.content.startsWith(prefix +'volume+')){
 					if (Math.round(dispatcher.volume*50) >= 100) return msg.channel.sendMessage(`Volume: ${Math.round(dispatcher.volume*50)}%`);
 					dispatcher.setVolume(Math.min((dispatcher.volume*50 + (5*(m.content.split('+').length-1)))/50,2));
@@ -102,7 +102,7 @@ const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403
           embed: {
             title: "Aide - Ban",
             description: `
-            Pour bannir une personne : k!ban @user (raison)
+            Pour bannir une personne : kd!ban @user (raison)
             N'oubliez pas de mentionner l'utilisateur.
             `,
             timestamp: new Date(),
@@ -179,7 +179,7 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
           embed: {
             title: "Aide - Kick",
             description: `
-            Pour kick une personne : k!kick @user (raison)
+            Pour kick une personne : kd!kick @user (raison)
             N'oubliez pas de mentionner l'utilisateur.
             `,
             timestamp: new Date(),
@@ -219,6 +219,16 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
             return;
           });
       }, 1000);
+	},
+	'avatar': (msg) => {
+  let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
+  let ava = user.displayAvatarURL
+  let embed = {
+      color:0x542437,
+      description:"Voici l'avatar de **"+user.username+"** *[URL]("+ava+")*",
+      image:{url:ava}
+  }
+  message.channel.send("", {embed});
 	}
 };
 
