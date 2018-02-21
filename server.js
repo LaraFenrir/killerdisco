@@ -230,15 +230,6 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
   }
   msg.channel.send("", {embed});
 	},
-	'math': (msg) => {
-		let repo;
-  try {
-    repo = math.eval(msg.prefix);
-  } catch (err) {
-    repo = err
-  }
-  msg.channel.send("**Calcul**\n```js\n" + message.suffix + "```\n**Réponse**\n```js\n" + repo + "```")
-}
 };
 
 client.on('ready', () => {
@@ -249,4 +240,4 @@ client.on('message', msg => {
 	if (!msg.content.startsWith(prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(prefix.length).split(' ')[0]](msg);
 });
-client.login("Mzg4NzI4MjkzNDkyMjYwODc1.DV-Ldw.Q8br2huiwtDmxHl9Sb5qHpNhD-k");
+client.login(process.env.TOKEN);
