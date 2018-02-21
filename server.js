@@ -221,14 +221,14 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
       }, 1000);
 	},
 	'avatar': (msg) => {
-  let user = message.mentions.users.first() ? message.mentions.users.first() : message.author
+  let user = msg.mentions.users.first() ? msg.mentions.users.first() : msg.author
   let ava = user.displayAvatarURL
   let embed = {
       color:0x542437,
       description:"Voici l'avatar de **"+user.username+"** *[URL]("+ava+")*",
       image:{url:ava}
   }
-  message.channel.send("", {embed});
+  msg.channel.send("", {embed});
 	}
 };
 
