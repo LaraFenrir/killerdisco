@@ -233,11 +233,11 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
 	'math': (msg) => {
 		let repo;
   try {
-    repo = math.eval(message.suffix);
+    repo = math.eval(msg.prefix);
   } catch (err) {
     repo = err
   }
-  message.channel.send("**Calcul**\n```js\n" + message.suffix + "```\n**Réponse**\n```js\n" + repo + "```")
+  msg.channel.send("**Calcul**\n```js\n" + message.suffix + "```\n**Réponse**\n```js\n" + repo + "```")
 }
 };
 
