@@ -224,7 +224,7 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
   let user = msg.mentions.users.first() ? msg.mentions.users.first() : msg.author
   let ava = user.displayAvatarURL
   let embed = {
-      color:0x542437,
+      color:FFFFFF,
       description:"Voici l'avatar de **"+user.username+"** *[URL]("+ava+")*",
       image:{url:ava}
   }
