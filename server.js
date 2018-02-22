@@ -230,7 +230,16 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
   }
   msg.channel.send("", {embed});
 	},
-};
+	'sl': (msg) => {
+		var servers = bot.guilds.array().map(g => g.name).join(' \n');
+   msg.channel.sendMessage("Nombres de serveurs : **" + bot.guilds.size + "** ")
+   msg.channel.sendMessage("", {embed: {
+      title: "Liste des serveurs",
+      color: 00229,
+      description: " "+servers+" ",
+    }}).catch(console.error);
+};      
+	}
 
 client.on('ready', () => {
 	console.log('▬▬▬▬▬▬▬▬▬▬▬▬\nConnecté à Discord\n▬▬▬▬▬▬▬▬▬▬▬▬');
