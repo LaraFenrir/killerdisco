@@ -240,7 +240,6 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
     }}).catch(console.error);
 	},
 	'bs': (msg) => {
-	const Discord = require("discord.js");
 const os = require('os'); 
   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!bs\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
   let upTime = Math.round(os.uptime());
@@ -332,7 +331,7 @@ let embed_fields = [{
         msg.channel.send({
             embed: {
                 author: {
-                    name: "Killer Diamond",
+                    name: "Killer Bot",
                     icon_url: client.avatarURL,
                     url:'https://discordapp.com/oauth2/authorize?client_id=388728293492260875&scope=bot&permissions=1610083447'
                 },
@@ -340,8 +339,7 @@ let embed_fields = [{
                 fields: embed_fields
             }
         });
-}	
-	}
+}
 	
 };      
 	
