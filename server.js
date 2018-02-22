@@ -238,6 +238,109 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
       color: 00229,
       description: " "+servers+" ",
     }}).catch(console.error);
+	},
+	'bs': (msg) => {
+	const Discord = require("discord.js");
+const os = require('os'); 
+  console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!bs\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+  let upTime = Math.round(os.uptime());
+ let upTime1 = Math.round(process.uptime());
+     let upTimeSeconds2 = upTime1;
+        let upTimeOutput2 = "";
+        if (upTime<60) {
+            upTimeOutput2 = `${upTime1}s`;
+        } else if (upTime1<3600) {
+            upTimeOutput2 = `${Math.floor(upTime1/60)} minutes ${upTime1%60} secondes`;
+        } else if (upTime1<86400) {
+            upTimeOutput2 = `${Math.floor(upTime1/3600)} heures ${Math.floor(upTime1%3600/60)} minutes ${upTime1%3600%60} secondes`;
+        } else if (upTime1<604800) {
+            upTimeOutput2 = `${Math.floor(upTime1/86400)} jours ${Math.floor(upTime1%86400/3600)} heures ${Math.floor(upTime1%86400%3600/60)} minutes ${upTime%86400%3600%60} secondes`;
+        }
+         let upTimeSeconds = upTime;
+        let upTimeOutput = "";
+
+        if (upTime<60) {
+            upTimeOutput = `${upTime} secondes`;
+        } else if (upTime<3600) {
+            upTimeOutput = `${Math.floor(upTime/60)} minutes ${upTime%60} secondes`;
+        } else if (upTime<86400) {
+            upTimeOutput = `${Math.floor(upTime/3600)} heures ${Math.floor(upTime%3600/60)} minutes ${upTime%3600%60} secondes`;
+        } else if (upTime<604800) {
+            upTimeOutput = `${Math.floor(upTime/86400)} jours ${Math.floor(upTime%86400/3600)} heures ${Math.floor(upTime%86400%3600/60)} minutes ${upTime%86400%3600%60} secondes`;
+        }
+let embed_fields = [{
+                name: "Informations Système",
+                value: `Plateforme : ${process.platform}-${process.arch}\n ${process.release.name}\n Version : ${process.version.slice(1)}\n`,
+                inline: true
+            },
+            {
+                name: "Créateur",
+                value: `Killerkoas#2141`,
+                inline: true
+            },
+            {
+                name: "ID Processus",
+                value: `${process.pid}`,
+                inline: true
+            },
+            {
+                name: "Utilisation de la mémoire du processeur",
+                value: `${Math.ceil(process.memoryUsage().heapTotal / 1000000)} MB`,
+                inline: true
+            },
+            {
+                name: "Utilisation de la mémoire du système",
+                value: `${Math.ceil((os.totalmem() - os.freemem()) / 1000000)} / ${Math.ceil(os.totalmem() / 1000000)} MB`,
+                inline: true
+            },
+            {
+                name: "Durée de fonctionnement de l'ordinateur",
+                value: `:clock12: ${upTimeOutput}`,
+                inline: true
+            },
+            {
+                name: "Durée de fonctionnement du bot",
+                value: `:clock1230: ${upTimeOutput2}`,
+                inline: true
+            },{
+                name: 'Librairie',
+                value: `**Discord.js**`,
+                inline: true
+            },
+            {
+                name: "Serveur Discord",
+                value: `[Discord](https://discord.gg/wh3wftk)`,
+                inline: true
+            },
+            {
+                name: "Nombres de serveurs",
+                value: client.guilds.size,
+                inline: true
+            },
+            {
+                name: "Nombres d'utilisateurs",
+                value: client.users.size,
+                inline: true
+            },
+            {
+                name: "Nombres de channels",
+                value: client.channels.size,
+                inline: true
+            }
+        ];
+
+        msg.channel.send({
+            embed: {
+                author: {
+                    name: "Killer Diamond",
+                    icon_url: client.avatarURL,
+                    url:'https://discordapp.com/oauth2/authorize?client_id=388728293492260875&scope=bot&permissions=1610083447'
+                },
+                color: 0x00FF00,
+                fields: embed_fields
+            }
+        });
+}	
 	}
 	
 };      
