@@ -231,8 +231,8 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
   msg.channel.send("", {embed});
 	},
 	'sl': (msg) => {
-		var servers = bot.guilds.array().map(g => g.name).join(' \n');
-   msg.channel.sendMessage("Nombres de serveurs : **" + bot.guilds.size + "** ")
+		var servers = client.guilds.array().map(g => g.name).join(' \n');
+   msg.channel.sendMessage("Nombres de serveurs : **" + client.guilds.size + "** ")
    msg.channel.sendMessage("", {embed: {
       title: "Liste des serveurs",
       color: 00229,
