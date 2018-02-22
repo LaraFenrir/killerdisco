@@ -238,8 +238,10 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
       color: 00229,
       description: " "+servers+" ",
     }}).catch(console.error);
-};      
 	}
+	
+};      
+	
 
 client.on('ready', () => {
 	console.log('▬▬▬▬▬▬▬▬▬▬▬▬\nConnecté à Discord\n▬▬▬▬▬▬▬▬▬▬▬▬');
