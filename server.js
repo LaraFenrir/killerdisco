@@ -331,7 +331,7 @@ let embed_fields = [{
         msg.channel.send({
             embed: {
                 author: {
-                    name: "Killer Bot",
+                    name: "Killer Diamond",
                     icon_url: client.avatarURL,
                     url:'https://discordapp.com/oauth2/authorize?client_id=388728293492260875&scope=bot&permissions=1610083447'
                 },
