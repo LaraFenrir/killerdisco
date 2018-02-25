@@ -339,7 +339,15 @@ let embed_fields = [{
                 fields: embed_fields
             }
         });
-}
+	   },
+	'ping': (msg) => {
+	console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ping\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+  startTime = Date.now();
+  msg.channel.sendMessage("Calcul en cours...").then((message) => {
+    endTime = Date.now();
+     message.edit("Message : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(bot.ping)+" ms");
+  }	
+	}
 	
 };      
 	
