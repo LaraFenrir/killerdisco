@@ -346,7 +346,7 @@ let embed_fields = [{
   msg.channel.sendMessage("Calcul en cours...").then((message) => {
     endTime = Date.now();
      message.edit("Message : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(bot.ping)+" ms");
-  });	
+  })	
 	},
 	'setgame': (msg) => {
 	    if (msg.author.id !== "242682458083033089") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
