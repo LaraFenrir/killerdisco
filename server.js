@@ -352,7 +352,7 @@ let embed_fields = [{
 	    if (msg.author.id !== "242682458083033089") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  };
+  }
   	}
 	
 };      
