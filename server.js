@@ -345,7 +345,7 @@ let embed_fields = [{
   startTime = Date.now();
   msg.channel.sendMessage("Calcul en cours...").then((message) => {
     endTime = Date.now();
-     message.edit("Bot : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(bot.ping)+" ms");
+     message.edit("Bot : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(client.ping)+" ms");
   });
 	},
 	'setgame': (msg) => {
