@@ -86,7 +86,7 @@ const commands = {
 	'ban': (msg) => {
 		  var user = msg.mentions.users.first();
   var params = msg.content.replace(cmd + "ban ", "").split(" ");
-   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
     var cmd = "kd!";
 var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
@@ -165,7 +165,7 @@ var params = msg.content.replace(cmd + "kick ", "").split(" ");
 const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
 
 var user = msg.mentions.users.first();
-    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
         var cmd = "kd!";
 var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
       if (!msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
@@ -241,7 +241,7 @@ var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", 
 	},
 	'bs': (msg) => {
 const os = require('os'); 
-  console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!bs\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+  console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!bs\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
   let upTime = Math.round(os.uptime());
  let upTime1 = Math.round(process.uptime());
      let upTimeSeconds2 = upTime1;
@@ -341,13 +341,19 @@ let embed_fields = [{
         });
 	   },
 	'ping': (msg) => {
-	console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!ping\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
+	console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!ping\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
   startTime = Date.now();
   msg.channel.sendMessage("Calcul en cours...").then((message) => {
     endTime = Date.now();
      message.edit("Message : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(bot.ping)+" ms");
   }	
-	}
+	},
+	'setgame': (msg) => {
+	    if (msg.author.id !== "242682458083033089") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
+  	msg.channel.send("Setting updated : Setgame")
+    bot.user.setGame(`kd!help | ${bot.guilds.size} serveurs | ${bot.users.size} users`);
+  };
+  	}
 	
 };      
 	
