@@ -81,7 +81,7 @@ const commands = {
 		msg.channel.sendMessage(tosend.join('\n'));
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == "242682458083033089") process.exit(); //Requires a node module like Forever to work.
+		if (msg.author.id == "216926828802211842") process.exit(); //Requires a node module like Forever to work.
 	},
 	'ban': (msg) => {
 		  var user = msg.mentions.users.first();
@@ -349,7 +349,7 @@ let embed_fields = [{
   });
 	},
 	'setgame': (msg) => {
-	    if (msg.author.id !== "242682458083033089") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
+	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
   	}
