@@ -2,6 +2,8 @@ const { Client } = require('discord.js');
 const yt = require('ytdl-core');
 const client = new Client();
 const prefix = "kd!";
+yt = require("./youtube_plugin"),
+youtube_plugin = new yt(),
 let queue = {};
 
 const commands = {
