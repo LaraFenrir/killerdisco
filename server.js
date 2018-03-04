@@ -355,7 +355,7 @@ let embed_fields = [{
   	},
 	'ytsearch': (message) => {
 		const ytsearch = require("./youtube_plugin"),
-		youtube_plugin = new ytsearch(),
+		const youtube_plugin = new ytsearch(),
 	youtube_plugin.respond(message.content, message.channel , client);
 	}
 	
