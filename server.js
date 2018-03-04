@@ -354,8 +354,9 @@ let embed_fields = [{
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
   	},
 	'ytsearch': (message) => {
-		const ytsearch = require("./youtube_plugin"),
-		const youtube_plugin = new ytsearch(),
+		var ytsearch = require("./youtube_plugin"),
+		var youtube_plugin = new ytsearch(),
+		var AuthDetails = require("./auth.json"),
 	youtube_plugin.respond(message.content, message.channel , client);
 	}
 	
