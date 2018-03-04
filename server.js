@@ -641,8 +641,9 @@ let mutedRole = message.guild.roles.find("name", "mute");
             icon_url: " ",
             proxy_icon_url: ' '
           }
-	
+	}
 };      
+		
 	
 
 client.on('ready', () => {
