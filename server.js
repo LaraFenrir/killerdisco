@@ -3,7 +3,7 @@ const yt = require('ytdl-core');
 const client = new Client();
 const prefix = "kd!";
 const ytsearch = require("./youtube_plugin"),
-const youtube_plugin = new ytsearch(),
+ youtube_plugin = new ytsearch(),
 let queue = {};
 
 const commands = {
