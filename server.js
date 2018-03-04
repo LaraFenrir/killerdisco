@@ -352,13 +352,7 @@ let embed_fields = [{
 	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  	},
-	'ytsearch': (message) => {
-		var ytsearch = require("./youtube_plugin"),
-		var youtube_plugin = new ytsearch(),
-		var AuthDetails = require("./auth.json"),
-	youtube_plugin.respond(message.content, message.channel , client);
-	}
+  	}
 	
 };      
 	
