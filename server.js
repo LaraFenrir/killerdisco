@@ -2,8 +2,6 @@ const { Client } = require('discord.js');
 const yt = require('ytdl-core');
 const client = new Client();
 const prefix = "kd!";
-const ytsearch = require("./youtube_plugin"),
- youtube_plugin = new ytsearch(),
 let queue = {};
 
 const commands = {
@@ -356,6 +354,8 @@ let embed_fields = [{
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
   	},
 	'ytsearch': (message) => {
+		const ytsearch = require("./youtube_plugin"),
+		youtube_plugin = new ytsearch(),
 	youtube_plugin.respond(message.content, message.channel , client);
 	}
 	
