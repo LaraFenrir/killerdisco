@@ -83,142 +83,213 @@ const commands = {
 	'reboot': (msg) => {
 		if (msg.author.id == "216926828802211842") process.exit(); //Requires a node module like Forever to work.
 	},
-	'ban': (msg) => {
-		  var user = msg.mentions.users.first();
-  var params = msg.content.replace(cmd + "ban ", "").split(" ");
-   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!ban\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
-    var cmd = "kd!";
-var reasonban = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
-const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
-
-
-      if (!msg.guild.member(msg.author).hasPermission("BAN_MEMBERS")) {
-        msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **BAN_MEMBERS**")
-        return;
-      }
-
-      if (user == null) {
-        msg.channel.send("", {
-          embed: {
-            title: "Aide - Ban",
-            description: `
-            Pour bannir une personne : kd!ban @user (raison)
-            N'oubliez pas de mentionner l'utilisateur.
-            `,
-            timestamp: new Date(),
-            color: 0x4077FF
-          }});
-        return;
-      }
-
-      if (reasonban == null || reasonban == "" || params[0] == null || params[1] == null) {
-        msg.channel.send("", {
-          embed: {
-            title: "Aide - Ban",
-            description: `
-            Pour bannir une personne : k!ban @user (raison)
-            N'oubliez pas de mentionner l'utilisateur.
-            `,
-            timestamp: new Date(),
-            color: 0x4077FF
+	'ban': (message) => {
+ let modRole = message.guild.roles.find("name", "Mod");
+if(!message.member.roles.has(modRole.id)) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Vous n'avez pas la permissions d'utiliser cette commande ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
           }
-        });
-        return;
-      }
+        }}).catch(console.error);
+      } 
+    if(!message.guild.roles.exists("name", "Mod")) {
+        return  message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Le rôle **Mod** n'existe pas dans ce serveur veuillez le créer pour Kick! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+if(message.mentions.users.size === 0) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Merci de spécifié l'utilisateur que vous voulez Kick. **Format ~> `kd!ban @mention`** ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+}
+let banMember = message.guild.member(message.mentions.users.first());
+if(!banMember) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :x:  L\'utilisateur que vous avez entré n'est pas valide ! :x:",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+}
+if(!message.guild.member(client.user).hasPermission("BAN_MEMBERS")) {
+  return message.reply("Je n'ai pas la permissions ** __(BAN_MEMBERS)__ **!").catch(console.error);
+}
+         if(!message.guild.channels.exists("name", "admin-logs")){
+// créer le channel
+message.guild.createChannel('admin-logs');
+// Affiche un message d'erreur expliquant que le channel n'existait pas
+return message.channel.sendMessage("", {embed: {
+title: "Erreur:",
+color: 0xff0000,
+description: " :no_entry_sign: Le salon textuel `admin-logs` n'existait pas, je viens de le créer pour vous :white_check_mark: , Veuillez réessayer :wink:",
+footer: {
+text: "Killer Diamond"
+}
+}}).catch(console.error);
+}   
+banMember.ban().then(member => {
+    message.channel.sendMessage("", {embed: {
+          title: "Succès :white_check_mark:",
+          color: 0xff0000,
+          description: `${member.user.username}`+` à bien été ban`,
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+}).then(message.guild.channels.find('name','admin-logs').sendMessage({
+        embed: {
+          type: 'rich',
+          description: '',
+          fields: [{
+            name: '**L\'utilisateur <~>**',
+            value: banMember.user.username,
+            inline: true
+          }, {
+            name: 'User id',
+            value: banMember.id,
+            inline: true
+          },{
+            name: '**Action <~>**',
+            value: "ban",
+            inline: true
+},{
+            name: 'Modérateur',
+            value: message.author.username,
+            inline: true
+}],
+       
+          color: 0xD30000,
+          footer: {
+            text: 'Moderation',
+            proxy_icon_url: ' '
+          },
 
-      if (!msg.channel.guild.member(user).bannable) {
-        msg.channel.sendMessage(":no_entry_sign: Je ne peux pas bannir l'utilisateur mentionné **"+msg.author.username+"** :no_entry_sign:");
-        return;
-      }
-
-      var banner = "";
-      var banned = "";
-
-      if (msg.channel.guild.member(msg.author).nickname == null) {
-        banner = msg.author.username;
-      } else {
-        banner = msg.channel.guild.member(msg.author).nickname;
-      }
-
-      if (msg.channel.guild.member(user).nickname == null) {
-        banned = user.username;
-      } else {
-        banned = msg.channel.guild.member(user).nickname;
-      }
-
-      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a banni du serveur " + msg.guild.name + "\n Raison : **" + reasonban + "**.");
-
-      setTimeout(function () {
-        msg.channel.guild.member(user).ban()
-          .then(() => {
-            msg.channel.sendMessage("Utilisateur banni avec succès !\n Modérateur:"+msg.author.username+" \n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : **" + reasonban +"**\n");
-            console.log("▬▬▬▬ Utilisateur Banni ▬▬▬▬\n Modérateur:"+msg.author.username+"\n Serveur: "+msg.guild.name+"\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n Informations à propos de l'utilisateur banni :\n Pseudonyme : "+user+"\n Raison : " + reasonban +"\n")
-          })
-          .catch(err => {
-            msg.reply(`\`${err}\``);
-            return;
-          });
-      }, 1000);
+          author: { 
+            name: banMember.user.username + "#"+ banMember.user.discriminator,
+            icon_url: " ",
+            proxy_icon_url: ' '
+          }
+        }
+})).catch(console.error);
 	},
-	'kick': (msg) => {
-var params = msg.content.replace(cmd + "kick ", "").split(" ");
-const iconURL = "https://media.discordapp.net/attachments/403246036396670986/403249675534204938/giphy.gif"
+	'kick': (message) => {
+let modRole = message.guild.roles.find("name", "Mod");
+if(!message.member.roles.has(modRole.id)) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Vous n'avez pas la permissions d'utiliser cette commande ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+    if(!message.guild.roles.exists("name", "Mod")) {
+        return  message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Le rôle **Mod** n'existe pas dans ce serveur veuillez le créer pour Kick! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+if(message.mentions.users.size === 0) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Merci de spécifié l'utilisateur que vous voulez Kick. **Format ~> `kd!kick @mention`** ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+}
+let kickMember = message.guild.member(message.mentions.users.first());
+if(!kickMember) {
+  return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :x:  L\'utilisateur que vous avez entré n'est pas valide ! :x:",
+          footer: {
+            text: "Killer Diamond."
+          }
+        }}).catch(console.error);
+}
+if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) {
+  return message.reply("Je n'ai pas la permissions ** __(KICK_MEMBERS)__ **!").catch(console.error);
+}
+         if(!message.guild.channels.exists("name", "admin-logs")){
+// créer le channel
+message.guild.createChannel('admin-logs');
+// Affiche un message d'erreur expliquant que le channel n'existait pas
+return message.channel.sendMessage("", {embed: {
+title: "Erreur:",
+color: 0xff0000,
+description: " :no_entry_sign: Le salon textuel `admin-logs` n'existait pas, je viens de le créer pour vous :white_check_mark: , Veuillez réessayer :wink:",
+footer: {
+text: "Killer Diamond"
+}
+}}).catch(console.error);
+}   
+kickMember.kick().then(member => {
+    message.channel.sendMessage("", {embed: {
+          title: "Succès :white_check_mark:",
+          color: 0xff0000,
+          description: `${member.user.username}`+` à bien été kick`,
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+}).then(message.guild.channels.find('name','admin-logs').sendMessage({
+        embed: {
+          type: 'rich',
+          description: '',
+          fields: [{
+            name: '**L\'utilisateur <~>**',
+            value: kickMember.user.username,
+            inline: true
+          }, {
+            name: 'User id',
+            value: kickMember.id,
+            inline: true
+          },{
+            name: '**Action <~>**',
+            value: "Kick",
+            inline: true
+},{
+            name: 'Modérateur',
+            value: message.author.username,
+            inline: true
+}],
+       
+          color: 0xD30000,
+          footer: {
+            text: 'Moderation',
+            proxy_icon_url: ' '
+          },
 
-var user = msg.mentions.users.first();
-    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: kd!kick\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")
-        var cmd = "kd!";
-var reasonkick = msg.content.replace(params[0] + " ", "").replace(cmd + "ban ", "");
-      if (!msg.guild.member(msg.author).hasPermission("KICK_MEMBERS")) {
-        msg.reply("**Une erreur est survenu**\n Raison : Vous n'avez pas la permission **KICK_MEMBERS**")
-        return;
-      }
-
-
-      if (user == null) {
-        msg.channel.send("", {
-          embed: {
-            title: "Aide - Kick",
-            description: `
-            Pour kick une personne : kd!kick @user (raison)
-            N'oubliez pas de mentionner l'utilisateur.
-            `,
-            timestamp: new Date(),
-            color: 0x4077FF
-          }});
-        return;
-      }
-
-      if (reasonkick == null || reasonkick == "" || params[0] == null || params[1] == null) {
-        msg.channel.send("", {
-          embed: {
-            title: "Aide - Kick",
-            description: `
-            Pour kick une personne : k!kick @user (raison)
-            N'oubliez pas de mentionner l'utilisateur.
-            `,
-            timestamp: new Date(),
-            color: 0x4077FF
-          }});
-        return;
-      }
-
-      if (!msg.channel.guild.member(user).bannable) {
-        msg.reply(":no_entry_sign: Je ne peux pas kick l'utilisateur mentionné **"+msg.author.username+"** :no_entry_sign:");
-        return;
-      }
-
-      user.sendMessage(msg.author.username + "#" + msg.author.discriminator + " vous a kick de " + msg.guild.name + "\nRaison: **" + reasonkick + "**.\n");
-
-      setTimeout(function () {
-        msg.channel.guild.member(user).kick()
-          .then(() => {
-            msg.channel.sendMessage("L'utilisateur "+user+" a été kick du serveur !");
-          })
-          .catch(err => {
-            msg.reply(`\`${err}\``);
-            return;
-          });
-      }, 1000);
+          author: { 
+            name: kickMember.user.username + "#"+ kickMember.user.discriminator,
+            icon_url: " ",
+            proxy_icon_url: ' '
+          }
+        }
+})).catch(console.error);
 	},
 	'avatar': (msg) => {
   let user = msg.mentions.users.first() ? msg.mentions.users.first() : msg.author
@@ -352,7 +423,224 @@ let embed_fields = [{
 	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  	}
+  	},
+	'mute': (message) => {
+let modRole = message.guild.roles.find("name", "Mod");
+    if(!message.guild.roles.exists("name", "mute")) {
+        return  message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Le rôle **mute** n'existe pas dans ce serveur veuillez le créer pour Mute! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+      if(!message.member.roles.has(modRole.id)) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Vous n'avez pas la permissions d'utiliser cette commande ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+      if(message.mentions.users.size === 0) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Merci de spécifié l'utilisateur que vous voulez mute totalment. **Format ~> `kd!mute @mention`** ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      }
+      let muteMember = message.guild.member(message.mentions.users.first());
+      if(!muteMember) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :x:  L\'utilisateur que vous avez entré n'est pas valide ! :x:",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      }
+      if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) {
+        return message.reply("Je n'ai pas la permissions pour faire cela __(MANAGE_MESSAGES)__ !").catch(console.error);
+      }
+         if(!message.guild.channels.exists("name", "admin-logs")){
+// créer le channel
+message.guild.createChannel('admin-logs');
+// Affiche un message d'erreur expliquant que le channel n'existait pas
+return message.channel.sendMessage("", {embed: {
+title: "Erreur:",
+color: 0xff0000,
+description: " :no_entry_sign: Le salon textuel `admin-logs` n'existait pas, je viens de le créer pour vous :white_check_mark: , Veuillez réessayer :wink:",
+footer: {
+text: "Killer Diamond"
+}
+}}).catch(console.error);
+}     
+let mutedRole = message.guild.roles.find("name", "mute");
+    var time = 500000;
+    console.log(muteMember);
+      muteMember.addRole(mutedRole).then(member => {
+        message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :white_check_mark:  Vous avez bien mute ** "+ muteMember + " dans le serveur "+message.guild.name  + " ! :white_check_mark: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).then(message.guild.channels.find('name','admin-logs').sendMessage({
+        embed: {
+          type: 'rich',
+          description: '',
+          fields: [{
+            name: '**L\'utilisateur <~>**',
+            value: muteMember.user.username,
+            inline: true
+          }, {
+            name: 'User id',
+            value: muteMember.id,
+            inline: true
+          },{
+            name: '**Action <~>**',
+            value: "mute total",
+            inline: true
+},{
+            name: 'Modérateur',
+            value: message.author.username,
+            inline: true
+}],
+       
+          color: 0xD30000,
+          footer: {
+            text: 'Moderation',
+            proxy_icon_url: ' '
+          },
+
+          author: { 
+            name: muteMember.user.username,
+            icon_url: " ",
+            proxy_icon_url: ' '
+          }
+	},
+	'unmute': (message) => {
+		 let modRole = message.guild.roles.find("name", "Mod");
+            if(!message.guild.roles.exists("name", "Mod")) {
+        return  message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Le rôle **Mod** n'existe pas dans ce serveur veuillez le créer pour unmute! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      }
+    if(!message.guild.roles.exists("name", "mute")) {
+        return  message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Le rôle **mute** n'existe pas dans ce serveur veuillez le créer pour Unmute! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+      if(!message.member.roles.has(modRole.id)) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Vous n'avez pas la permissions d'utiliser cette commande ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      } 
+      if(message.mentions.users.size === 0) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :no_entry_sign: Merci de spécifié l'utilisateur que vous voulez unmute totalment. **Format ~> `!unmute @mention`** ! :no_entry_sign: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      }
+      let muteMember = message.guild.member(message.mentions.users.first());
+      if(!muteMember) {
+        return message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :x:  L\'utilisateur que vous avez entré n'est pas valide ! :x:",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).catch(console.error);
+      }
+      if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) {
+        return message.reply("Je n'ai pas la permissions pour faire cela __(MANAGE_MESSAGES)__ !").catch(console.error);
+      }
+         if(!message.guild.channels.exists("name", "admin-logs")){
+// créer le channel
+message.guild.createChannel('admin-logs');
+// Affiche un message d'erreur expliquant que le channel n'existait pas
+return message.channel.sendMessage("", {embed: {
+title: "Erreur:",
+color: 0xff0000,
+description: " :no_entry_sign: Le salon textuel `admin-logs` n'existait pas, je viens de le créer pour vous :white_check_mark: , Veuillez réessayer :wink:",
+footer: {
+text: "Killer Diamond"
+}
+}}).catch(console.error);
+}   
+let mutedRole = message.guild.roles.find("name", "mute");
+    var time = 500000;
+    console.log(muteMember);
+      muteMember.removeRole(mutedRole).then(member => {
+        message.channel.sendMessage("", {embed: {
+          title: "Erreur:",
+          color: 0xff0000,
+          description: " :white_check_mark:  Vous avez bien unmute ** "+ muteMember + " dans le serveur "+message.guild.name  + " ! :white_check_mark: ",
+          footer: {
+            text: "Killer Diamond"
+          }
+        }}).then(message.guild.channels.find('name','admin-logs').sendMessage({
+        embed: {
+          type: 'rich',
+          description: '',
+          fields: [{
+            name: '**L\'utilisateur <~>**',
+            value: muteMember.user.username,
+            inline: true
+          }, {
+            name: 'User id',
+            value: muteMember.id,
+            inline: true
+          },{
+            name: '**Action <~>**',
+            value: "unmute total",
+            inline: true
+},{
+            name: 'Modérateur',
+            value: message.author.username,
+            inline: true
+}],
+       
+          color: 0xD30000,
+          footer: {
+            text: 'Moderation',
+            proxy_icon_url: ' '
+          },
+
+          author: { 
+            name: muteMember.user.username,
+            icon_url: " ",
+            proxy_icon_url: ' '
+          }
 	
 };      
 	
