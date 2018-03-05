@@ -352,16 +352,7 @@ let embed_fields = [{
 	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  	},
-	'cat': (msg) => {
-	  var r = request.get('http://thecatapi.com/api/images/get.php/gif.php?type=gif', function(err, res, body) {
-     if (err) {
-      msg.channel.send("Une erreur est survenue :/");
-      return;
-     }
-     msg.channel.sendFile(r.uri.href);
-    });
-	}
+  	}
 	
 };      
 	
