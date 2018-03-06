@@ -5,7 +5,7 @@ const prefix = "kd!";
 let queue = {};
 
 client.on('message', msg => {
-client.user.setgame("Killer Diamond | kd!help | Alpha Version")	
+client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
 });
 
 const commands = {
