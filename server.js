@@ -4,6 +4,10 @@ const client = new Client();
 const prefix = "kd!";
 let queue = {};
 
+client.on('message', msg => {
+client.setgame("Killer Diamond | kd!help | Alpha Version")	
+});
+
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
