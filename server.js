@@ -373,6 +373,9 @@ let embed_fields = [{
   args = args.join(" ");
   msg.channel.send(args);
   msg.delete(prefix+"say")	
+	},
+	'invite': (msg) => {
+	msg.channel.sendMessage("Voici mon lien d'invitation :tickets: > https://discordapp.com/oauth2/authorize?client_id=419167328165560331&scope=bot&permissions=-1")	
 	}
 	
 };      
