@@ -352,7 +352,24 @@ let embed_fields = [{
 	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
   	msg.channel.send("Setting updated : Setgame")
     client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  	}
+  	},
+	'say': (msg) => {
+	if (msg.author.bot) return;
+  var args = msg.content.split(" ");
+  args.splice(0, 1);
+  args = args.join(" ");
+  msg.channel.send(args+"\nRequête de "+msg.author+".");
+  msg.delete(prefix+"say")
+   console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!say\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")	
+	},
+	'osay': (msg) => {
+	if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage("Permission insuffisante.")
+  var args = msg.content.split(" ");
+  args.splice(0, 1);
+  args = args.join(" ");
+  msg.channel.send(args);
+  msg.delete(prefix+"say")	
+	}
 	
 };      
 	
