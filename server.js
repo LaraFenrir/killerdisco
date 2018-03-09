@@ -17,6 +17,12 @@ if( swearWords.some(word => message.content.includes(word)) ) {
 }
 });
 
+client.on("message", (message) => {
+  // Exit and stop if the prefix is not there or if user is a bot
+  if (!message.content.startsWith(prefix) || message.author.bot) return;
+});
+
+
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
