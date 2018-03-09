@@ -8,6 +8,15 @@ client.on('message', msg => {
 client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
 });
 
+client.on('message', message => {
+  if (message.author.id === "392441246238375936") return;
+const swearWords = ["suce", "connard", "fdp", "ntm", "nique ta mère", "nique ta mere", "connasse","fils de pute","pd","FDP","PD","FILS DE PUTE","NTM","SUCE","PUTE","pute","NIQUE TA MERE"];
+if( swearWords.some(word => message.content.includes(word)) ) {
+  message.channel.sendMessage(":no_entry: Les insultes sont interdites "+message.author+" !");
+  message.delete(message.author)
+}
+});
+
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
