@@ -391,7 +391,33 @@ let embed_fields = [{
 	},
 	'invite': (msg) => {
 	msg.channel.sendMessage("Voici mon lien d'invitation :tickets: > https://discordapp.com/oauth2/authorize?client_id=419167328165560331&scope=bot&permissions=-1")	
-	}
+	},
+	'eval': (msg) => {
+		const params = msg.content.split(" ");
+const args = msg.content.split(" ").slice(1);
+function clean(text) {
+  if (typeof(text) === "string")
+    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+  else
+      return text;
+}
+  if(msg.author.id === "392441246238375936") {
+    try {
+         var code = args.join(" ");
+         var evaled = eval(code);
+
+         if (typeof evaled !== "string") {
+           evaled = require("util").inspect(evaled);
+         }
+         msg.channel.sendMessage(":floppy_disk:  Output:")
+         msg.channel.sendCode("xl", clean(evaled));
+       } catch(err) {
+         msg.channel.sendMessage(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+       }
+     } else {
+    msg.channel.sendMessage("Vous n'avez pas accès à cette commande !");
+  };
+     }
 	
 };      
 	
