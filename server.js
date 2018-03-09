@@ -11,7 +11,7 @@ client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
 client.on('message', message => {
   if (message.author.id === "392441246238375936") return;
   if (message.author.id === "319156365262323712") return;
-const swearWords = ["suce", "connard", "fdp", "ntm", "nique ta mère", "nique ta mere", "connasse","fils de pute","pd","FDP","PD","FILS DE PUTE","NTM","SUCE","PUTE","pute","NIQUE TA MERE","salope","saloppe","saloope","PUTEUH","puteuh","SALOPE","SALOPPE","SALOOPE","salloppe","SALLOPPE"];
+const swearWords = ["suce", "connard", "fdp", "ntm", "nique ta mère", "nique ta mere", "connasse","fils de pute","pd","FDP","PD","FILS DE PUTE","NTM","SUCE","PUTE","pute","NIQUE TA MERE","salope","saloppe","saloope","PUTEUH","puteuh","SALOPE","SALOPPE","SALOOPE","salloppe","SALLOPPE","encule","Encule","Pd","Fdp","Batard","fuck","Pute","gueule","ta gueule","tg","TG","Tg"];
 if( swearWords.some(word => message.content.includes(word)) ) {
   message.channel.sendMessage(":no_entry: Les insultes sont interdites "+message.author+" !");
   message.delete(message.author)
