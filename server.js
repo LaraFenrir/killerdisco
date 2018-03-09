@@ -382,7 +382,7 @@ let embed_fields = [{
    console.log("▬▬▬▬ LOGS ▬▬▬▬\nUser ID :"+msg.author.id+"\nServer: "+msg.guild.name+"\nUsername: "+msg.author.username+"\nCommand: k!say\n ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ ")	
 	},
 	'osay': (msg) => {
-	if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage("Permission insuffisante.")
+	if (msg.author.id !== "392441246238375936") return msg.channel.sendMessage("Permission insuffisante.")
   var args = msg.content.split(" ");
   args.splice(0, 1);
   args = args.join(" ");
