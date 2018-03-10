@@ -35,7 +35,7 @@ client.on("message", (message) => {
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
-		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.play(msg)).then(() => dispatcher.setVolume(Math.min((dispatcher.volume*10)));;
+		if (!msg.guild.voiceConnection) return commands.join(msg).then(() => commands.play(msg)).then(() => dispatcher.setVolume(Math.min((dispatcher.volume*10))));
 		if (queue[msg.guild.id].playing) return msg.channel.sendMessage('Je joue déjà une musique');
 		let dispatcher;
 		queue[msg.guild.id].playing = true;
