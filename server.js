@@ -32,6 +32,7 @@ client.on("message", (message) => {
 });
 
 
+
 const commands = {
 	'play': (msg) => {
 		if (queue[msg.guild.id] === undefined) return msg.channel.sendMessage(`Ajoutez une musique avec ${prefix}add`);
@@ -103,10 +104,6 @@ const commands = {
 		let tosend = [];
 		queue[msg.guild.id].songs.forEach((song, i) => { tosend.push(`${i+1}. ${song.title} - Requête par : ${song.requester}`);});
 		msg.channel.sendMessage(`**${tosend.length}** musiques dans la playlist ${(tosend.length > 15 ? '*[Seulement 15 musiques apparaissent]*' : '')}\n\`\`\`${tosend.slice(0,15).join('\n')}\`\`\``);
-	},
-	'help': (msg) => {
-		let tosend = ['```xl', prefix + 'join : "Join Voice channel of msg sender"', prefix + 'add : "Add a valid youtube link to the queue"', prefix + 'queue : "Shows the current queue, up to 15 songs shown."', prefix + 'play : "Play the music queue if already joined to a voice channel"', '', 'the following commands only function while the play command is running:'.toUpperCase(), prefix + 'pause : "pauses the music"',	prefix + 'resume : "resumes the music"', prefix + 'skip : "skips the playing song"', prefix + 'time : "Shows the playtime of the song."',	'volume+(+++) : "increases volume by 2%/+"',	'volume-(---) : "decreases volume by 2%/-"',	'```'];
-		msg.channel.sendMessage(tosend.join('\n'));
 	},
 	'reboot': (msg) => {
 		if (msg.author.id == "216926828802211842") process.exit(); //Requires a node module like Forever to work.
@@ -376,11 +373,6 @@ let embed_fields = [{
      message.edit("Bot : " + Math.round(endTime - startTime) + " ms\nAPI : "+Math.round(client.ping)+" ms");
   });
 	},
-	'setgame': (msg) => {
-	    if (msg.author.id !== "216926828802211842") return msg.channel.sendMessage(":no_entry_sign: Vous n'avez pas accès à cette commande ! :no_entry_sign:");
-  	msg.channel.send("Setting updated : Setgame")
-    client.user.setGame(`kd!help | ${client.guilds.size} serveurs | Beta`);
-  	},
 	'say': (msg) => {
 	if (msg.author.bot) return;
   var args = msg.content.split(" ");
@@ -426,6 +418,22 @@ function clean(text) {
      } else {
     msg.channel.sendMessage("Vous n'avez pas accès à cette commande !");
   };
+     },
+     'help': (msg) => {
+	 msg.channel.send("", {
+          embed: {
+            title: "Commande Aide",
+            description: `
+           **Musique :**\n
+		kd!add <url> (Ajoute une musique via un lien YouTube)\n kd!play (Joue la première musique de la playlist)\n kd!pause (Met en pause la musique)\n kd!resume (Reprend la musique)\n kd!volume+ (Augmente le volume de 5%)\n kd!volume- (Baisse le volume de 5%)\n kd!time (Affiche le temps écoulé de la musique en minutes & secondes)\n kd!queue (Affiche la playlist)\n
+	   **Modération :**\n
+		kd!ban <@mention> <raison> (Bannir un membre du serveur)\n kd!kick <@mention <raison> (Kick un membre du serveur)\n
+	   **Utilitaires & Informations :**\n
+		kd!bs (Affiche des informations du bot)\n kd!ping (Affiche le ping du bot & de l'API)\n kd!say <message> (Tada :tada: ! Le bot parlera désormais grâce à cette commande !)\n kd!sl (Affiche le nombres de serveurs + leurs noms )\n kd!avatar <@mention> ou kd!avatar (Affiche votre avatar ou celui de quelqu'un d'autres en le mentionnant)\n kd!invite (Envoi un message pour inviter le bot sur d'autres serveurs)
+            `,
+            timestamp: new Date(),
+            color: 0x4077FF
+          }});    
      }
 	
 };      
