@@ -8,23 +8,14 @@ client.on('message', msg => {
 client.user.setPresence({ game: { name: 'kd!help | Mon développeur à 14 ans!', type: 1 } });
 });
 
-client.on('message', message => {
-  if (message.author.id === "420902183350042627") return;
-const swearWords = ["suce", "connard", "fdp", "ntm", "nique ta mère", "nique ta mere", "connasse","fils de pute","pd","FDP","PD","FILS DE PUTE","NTM","SUCE","PUTE","pute","NIQUE TA MERE","salope","saloppe","saloope","PUTEUH","puteuh","SALOPE","SALOPPE","SALOOPE","salloppe","SALLOPPE","encule","Encule","Pd","Fdp","Batard","fuck","Pute","gueule","ta gueule","tg","TG","Tg","CON","con"];
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.channel.sendMessage(":no_entry: Les insultes sont interdites "+message.author+" !");
-  message.delete(message.author)
-}
-});
 
-client.on('message', message => {
-  if (message.author.id === "420902183350042627") return;
-const swearWords = ["t.g","T.G","f.t.g","F.T.G","n.t.m","N.T.M","f.d.p","F.D.P","P.D","p.d","s.u.c.e","S.U.C.E"];
-if( swearWords.some(word => message.content.includes(word)) ) {
-  message.channel.sendMessage(":no_entry: N'essayez pas d'usebug le bot, "+message.author+" !!");
-  message.delete(message.author)
-}
-});
+
+
+
+
+
+
+
 
 client.on("message", (message) => {
   // Exit and stop if the prefix is not there or if user is a bot
