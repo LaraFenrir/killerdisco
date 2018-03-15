@@ -5,7 +5,7 @@ const prefix = "kd!";
 let queue = {};
 
 client.on('message', msg => {
-client.user.setPresence({ game: { name: 'kd!help | Mon développeur à 14 ans!', type: 1 } });
+client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
 });
 
 
