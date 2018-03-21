@@ -6,7 +6,7 @@ let queue = {};
 
 client.on('message', msg => {
 client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
-client.user.setUsername("Lenny Main")
+client.user.setUsername('Lenny Main')
 });
 
 
