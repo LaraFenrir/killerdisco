@@ -1,12 +1,12 @@
 const { Client } = require('discord.js');
 const yt = require('ytdl-core');
 const client = new Client();
-const prefix = "km!";
+const prefix = "kd!";
 let queue = {};
 
 client.on('message', msg => {
-client.user.setPresence({ game: { name: 'km!help | Alpha Version', type: 1 } });
-client.user.setUsername('Killer Music')
+client.user.setPresence({ game: { name: 'kd!help | Alpha Version', type: 1 } });
+client.user.setUsername('Killer Disco')
 });
 
 
