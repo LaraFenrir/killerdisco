@@ -426,6 +426,15 @@ function clean(text) {
             timestamp: new Date(),
             color: 0x4077FF
           }});    
+     },
+     'stop': (msg) => {
+	module.exports.func = function (bot, msg, guild) {
+		if (msg.author.id !== "") return msg.channel.sendMessage(":no_entry_sign: ```css \nVous n'avez pas la permission d'éxecuté cette commande !```\n")
+	msg.channel.sendMessage("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Bot Déconnecté !") // Message de déconnexion.
+	console.log("Disconnected.") // Envoi un message dans la console.
+	bot.destroy() // Ce système "detruit" votre bot en le déconnectant complètement (il ne ce supprime pas)
+};
+	})
      }
 	
 };      
