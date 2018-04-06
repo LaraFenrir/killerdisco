@@ -11,7 +11,34 @@ client.user.setUsername('Killer Disco')
 
 
 
+client.on("guildMemberAdd", member => {
+  if (member.guild.id === "399238780063580171") return;
+  let guild = member.guild;
+  const channel = client.channels.get("399247233557594112")
+  if (!channel) return;
+  channel.send(`Bienvenue à ${member.user.username} !`);
+  member.sendMessage("Hey "+member.user.username+" ! Nous te souhaitons la bienvenue ! :D Lis les règles avant de t'aventurer dans le serveur :wink: ");
+  member.send(
+  {
+    embed: {
+    color: 0x0049FF,
+    description: "**Règles**\n",
+    fields: [
+      {
+        name: "Interdictions",
+        value: "Il est interdit de : • Provoquer • Insulter gratuitement • Menacer quelqu'un • d'avoir des propos sexistes, pornographiques, fascistes, racistes et autres contenus interdit. • Révéler des informations privés sur vous ou sur quelqu'un ( DOX ) • Attaquer des données d'un service ou d'une personne ( DDoS ) • Troll ou manquer de respect • d'être insolent • Soundboard en vocal"
+      }
+    ]
+  }}).catch(console.error);
+});
 
+client.on("guildMemberRemove", member => {
+  if (member.guild.id === "399238780063580171") return;
+  let guild = member.guild;
+  const channel = client.channels.get("399247233557594112")
+  if (!channel) return;
+  guild.defaultChannel.sendMessage(`${member.user.username} à quitter le serveur. :(`);
+});
 
 
 
