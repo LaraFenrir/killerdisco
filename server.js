@@ -16,7 +16,7 @@ client.on("guildMemberAdd", member => {
   let guild = member.guild;
   const channel = client.channels.get("399247233557594112")
   if (!channel) return;
-  channel.send(`Bienvenue à ${member.user.username} !`);
+  channel.send(`[EXPERIMENTAL MODE] Bienvenue à ${member.user.username} sur **{guild.name}**`);
   member.sendMessage("Hey "+member.user.username+" ! Nous te souhaitons la bienvenue ! :D Lis les règles avant de t'aventurer dans le serveur :wink: ");
   member.send(
   {
@@ -37,7 +37,7 @@ client.on("guildMemberRemove", member => {
   let guild = member.guild;
   const channel = client.channels.get("399247233557594112")
   if (!channel) return;
-  guild.defaultChannel.sendMessage(`${member.user.username} à quitter le serveur. :(`);
+  channel.sendMessage(`[EXPERIMENTAL MODE] ${member.user.username} à quitter le serveur. :(`);
 });
 
 
