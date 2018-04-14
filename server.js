@@ -12,9 +12,9 @@ client.user.setUsername('Killer Disco')
 
 
 client.on("guildMemberAdd", member => {
-  if (member.guild.id === "399238780063580171") return;
+  if (member.guild.id === "420388616674476033") return;
   let guild = member.guild;
-  const channel = client.channels.get("399247233557594112")
+  const channel = client.channels.get("420389831235993601")
   if (!channel) return;
   channel.send(`[EXPERIMENTAL MODE] Bienvenue à ${member.user.username} sur **{guild.name}**`);
   member.sendMessage("Hey "+member.user.username+" ! Nous te souhaitons la bienvenue ! :D Lis les règles avant de t'aventurer dans le serveur :wink: ");
@@ -33,9 +33,9 @@ client.on("guildMemberAdd", member => {
 });
 
 client.on("guildMemberRemove", member => {
-  if (member.guild.id === "399238780063580171") return;
+  if (member.guild.id === "420388616674476033") return;
   let guild = member.guild;
-  const channel = client.channels.get("399247233557594112")
+  const channel = client.channels.get("420389831235993601")
   if (!channel) return;
   channel.sendMessage(`[EXPERIMENTAL MODE] ${member.user.username} à quitter le serveur. :(`);
 });
